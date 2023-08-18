@@ -62,7 +62,3 @@ jobs:
         with: 
           job-status: ${{job.status}}
           slack-bot-token: ${{ secrets.APP_TOKEN }}
-
-      
-
-
