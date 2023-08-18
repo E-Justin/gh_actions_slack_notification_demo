@@ -42,12 +42,18 @@ jobs:
 
     steps:
         
-      - name: slack notification
+      - name: slack notification1
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Post Title
           SLACK_MESSAGE: 'Post Content :rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: slack notification2
+        uses: kpritam/slack-job-status-action@v1
+        with: 
+          job-status: ${{job.status}}
+          slack-bot-token: ${{ secrets.SLACK_WEBHOOK }}
 
       
 
