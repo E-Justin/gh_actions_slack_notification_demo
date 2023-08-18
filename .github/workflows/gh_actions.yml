@@ -33,7 +33,7 @@ jobs:
       - name: run tests
         run: |
           pytest --version
-          pytest test
+          py.test test
 
       
 
