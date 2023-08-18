@@ -44,7 +44,8 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Post Title
-          SLACK_MESSAGE: 'Post Content : rocket:'
+          SLACK_MSG_AUTHOR: $GITHUB_ACTOR
+          SLACK_MESSAGE: 'Post Content :rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       
