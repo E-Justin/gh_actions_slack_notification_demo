@@ -35,6 +35,13 @@ jobs:
           pytest --version
           pytest test
 
+      - name: slack notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Post Title
+          SLACK_MESSAGE: 'Post Content : rocket:'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
       
 
 
