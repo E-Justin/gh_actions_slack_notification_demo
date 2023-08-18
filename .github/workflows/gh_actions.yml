@@ -32,7 +32,7 @@ jobs:
 
       - name: run tests
         run: |
-          pytest --version
+          py.test --version
           py.test test
 
       
