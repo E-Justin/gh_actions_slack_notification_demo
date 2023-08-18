@@ -34,8 +34,6 @@ jobs:
           pip install pytest
           pytest --version
           pytest test
-    outputs:
-      run_job_a: 'yes'
 
   Slack-Notification:
     runs-on: ubuntu-latest # only runs on linux
@@ -43,7 +41,6 @@ jobs:
     steps:
         
       - name: slack notification
-        if: ${{run_job_a}} == 'yes'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Post Title
