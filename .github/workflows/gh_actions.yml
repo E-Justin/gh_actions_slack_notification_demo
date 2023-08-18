@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   
   push:
-    branches: [ test ]
+    branches: [ main ]
 
   workflow_dispatch:
 
