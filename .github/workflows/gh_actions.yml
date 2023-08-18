@@ -32,7 +32,7 @@ jobs:
 
       - name: run tests
         run: |
-          python pytest -v
+          python pytest -v test
 
       
 
