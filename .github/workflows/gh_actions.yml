@@ -53,7 +53,7 @@ jobs:
         uses: kpritam/slack-job-status-action@v1
         with: 
           job-status: ${{job.status}}
-          slack-bot-token: ${{ secrets.SLACK_WEBHOOK }}
+          slack-bot-token: ${{ secrets.APP_TOKEN }}
 
       
 
