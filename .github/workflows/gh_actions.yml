@@ -32,8 +32,9 @@ jobs:
 
       - name: run tests
         run: |
-          py.test --version
-          py.test test
+          pip install pytest
+          pytest --version
+          pytest test
 
       
 
