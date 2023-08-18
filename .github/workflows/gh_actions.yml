@@ -39,6 +39,9 @@ jobs:
     runs-on: ubuntu-latest # only runs on linux
 
     steps:
+      - name: wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        
       - name: slack notification
         uses: rtCamp/action-slack-notify@v2
         env:
