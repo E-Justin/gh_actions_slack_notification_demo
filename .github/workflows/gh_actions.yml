@@ -34,6 +34,8 @@ jobs:
           pip install pytest
           pytest --version
           pytest test
+    outputs:
+      run_job_a: ${{ steps.set.outputs.run_job_Slack-Notification }}
 
   Slack-Notification:
     runs-on: ubuntu-latest # only runs on linux
@@ -41,6 +43,7 @@ jobs:
     steps:
         
       - name: slack notification
+        if: outputs.run_job_Python-tests == 'yes'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Post Title
