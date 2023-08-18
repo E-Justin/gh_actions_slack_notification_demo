@@ -41,11 +41,19 @@ jobs:
     runs-on: ubuntu-latest # only runs on linux
 
     steps:
-        
       - name: slack notification1
+        if: github.event_name == 'pull_request'
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_TITLE: Post Title
+          SLACK_TITLE: New ION PR opened!
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: slack notification1
+        if: github.event_name == 'push'
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Recent Push to ION main!
           SLACK_MESSAGE: 'Post Content :rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
