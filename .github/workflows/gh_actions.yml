@@ -46,7 +46,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: New ION PR opened!
-          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_MESSAGE: ':rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification1
@@ -54,7 +54,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Recent Push to ION main!
-          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_MESSAGE: ':rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification2
