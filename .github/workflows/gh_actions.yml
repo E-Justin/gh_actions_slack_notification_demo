@@ -34,8 +34,10 @@ jobs:
           pip install pytest
           pytest --version
           pytest test
+        
 
   Slack-Notification:
+    needs: Python-tests
     runs-on: ubuntu-latest # only runs on linux
 
     steps:
