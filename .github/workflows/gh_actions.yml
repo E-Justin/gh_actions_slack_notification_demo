@@ -11,7 +11,7 @@ on:
 
 
 jobs:
-  Set-up-env:
+  Python-tests:
     runs-on: windows-latest
     steps:
 
@@ -35,6 +35,10 @@ jobs:
           pytest --version
           pytest test
 
+  Slack-Notification:
+    runs-on: ubuntu-latest # only runs on linux
+
+    steps:
       - name: slack notification
         uses: rtCamp/action-slack-notify@v2
         env:
