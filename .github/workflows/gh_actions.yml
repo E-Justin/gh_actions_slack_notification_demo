@@ -34,26 +34,6 @@ jobs:
           pip install pytest
           pytest --version
           pytest test
-
-      - name: Notify slack of build status
-        if: success()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.BOT_USER_OAUTH_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: test-gh-actions-slack-notifications
-          status: SUCCESS
-          color: good
-
-      - name: Notify slack fail
-        if: failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.BOT_USER_OAUTH_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel: test-gh-actions-slack-notifications
-          status: FAILED
-          color: danger
         
 
   Slack-Notification:
@@ -76,6 +56,26 @@ jobs:
           SLACK_TITLE: Recent Push to ION main!
           SLACK_MESSAGE: ':rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Notify slack of build status
+        if: success()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.BOT_USER_OAUTH_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: test-gh-actions-slack-notifications
+          status: SUCCESS
+          color: good
+
+      - name: Notify slack fail
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.BOT_USER_OAUTH_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: test-gh-actions-slack-notifications
+          status: FAILED
+          color: danger
 
       - name: slack notification2
         uses: kpritam/slack-job-status-action@v1
