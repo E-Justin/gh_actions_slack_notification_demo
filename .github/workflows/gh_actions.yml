@@ -56,7 +56,8 @@ jobs:
         env:
           SLACK_TITLE: Recent Push to ION main!
           #SLACK_MESSAGE: '${{job.status}}  :rocket:'
-          SLACK_MESSAGE: "${{ Python-tests.outputs.job-status }}"
+          #SLACK_MESSAGE: "${{ Python-tests.outputs.job-status }}"
+          SLACK_MESSAGE: "${{ run tests.outputs.job-status }}"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification2
