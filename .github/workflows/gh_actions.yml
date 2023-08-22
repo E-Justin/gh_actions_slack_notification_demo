@@ -86,14 +86,14 @@ jobs:
           SLACK_LINK_NAMES: true
           SLACK_MESSAGE: "@justin.ezell"
 
-      - name: slack notification success
-        #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "success"
-        if: ${{ contains(needs.*.result, 'success') }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: "Build succeeded in main :tada:"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: "success"
+      # - name: slack notification success
+      #   #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "success"
+      #   if: ${{ contains(needs.*.result, 'success') }}
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_TITLE: "Build succeeded in main :tada:"
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_COLOR: "success"
 
       
 
