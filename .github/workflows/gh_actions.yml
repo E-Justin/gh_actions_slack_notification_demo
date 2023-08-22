@@ -55,7 +55,8 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Recent Push to ION main!
-          SLACK_MESSAGE: '${{job.status}}  :rocket:'
+          #SLACK_MESSAGE: '${{job.status}}  :rocket:'
+          SLACK_MESSAGE: "${{ Python-tests.outputs.job-status }}"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification2
