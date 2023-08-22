@@ -51,15 +51,12 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification1
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && "${{ join(needs.*.result, ',' }}" == "failure"
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Recent Push to ION main!
-          #SLACK_MESSAGE: '${{job.status}}  :rocket:'
-          #SLACK_MESSAGE: "${{ Python-tests.outputs.job-status }}"
-          #SLACK_MESSAGE: "${{ run tests.outputs.job-status }}"
-          #SLACK_MESSAGE: "${{ needs.Python-tests.outputs.job-status }}"
-          SLACK_MESSAGE: "${{ join(needs.*.result, ',') }} :rocket:"
+          #SLACK_MESSAGE: "${{ join(needs.*.result, ',') }} :rocket:"
+          SLACK_MESSAGE: "Build failed in main"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification2
