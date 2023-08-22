@@ -60,7 +60,8 @@ jobs:
           SLACK_COLOR: "failure"
 
       - name: slack notification success
-        if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "success"
+        #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "success"
+        if: ${{ contains(needs.*.result, 'success') }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: "Build succeeded in main :tada:"
