@@ -41,6 +41,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
+          channel: test-gh-actions-slack-notifications
           status: SUCCESS
           color: good
 
@@ -50,6 +51,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
         uses: voxmedia/github-action-slack-notify-build@v1
         with:
+          channel: test-gh-actions-slack-notifications
           status: FAILED
           color: danger
         
