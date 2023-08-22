@@ -50,21 +50,21 @@ jobs:
           SLACK_MESSAGE: ':rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-      - name: slack notification1
+      - name: slack notification fail
         if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: "Build failed in main :rotating_light:"
-          #SLACK_MESSAGE: "${{ join(needs.*.result, ',') }} :rocket:"
-          #SLACK_MESSAGE: "Build failed in main"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: "failure"
 
-      # - name: slack notification2
-      #   uses: kpritam/slack-job-status-action@v1
-      #   with: 
-      #     job-status: ${{job.status}}
-      #     slack-bot-token: ${{ secrets.APP_TOKEN }}
+      - name: slack notification success
+        if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "success"
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: "Build succeeded in main :tada:"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: "success"
 
       
 
