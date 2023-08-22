@@ -51,7 +51,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification1
-        if: github.event_name == 'push' && "${{ join(needs.*.result, ',' }}" == "failure"
+        if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Recent Push to ION main!
