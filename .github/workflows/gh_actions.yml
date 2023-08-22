@@ -54,9 +54,9 @@ jobs:
         if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_TITLE: Recent Push to ION main!
+          SLACK_TITLE: "Build failed in main :rotating_light:"
           #SLACK_MESSAGE: "${{ join(needs.*.result, ',') }} :rocket:"
-          SLACK_MESSAGE: "Build failed in main"
+          #SLACK_MESSAGE: "Build failed in main"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: "failure"
 
