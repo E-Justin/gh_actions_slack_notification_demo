@@ -39,6 +39,7 @@ jobs:
   Slack-Notification:
     needs: Python-tests
     runs-on: ubuntu-latest # only runs on linux
+    if: always()
 
     steps:
       - name: slack notification1
@@ -50,7 +51,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification1
-        if: always()
+        if: github.event_name == 'push'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Recent Push to ION main!
