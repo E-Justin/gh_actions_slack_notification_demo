@@ -34,6 +34,24 @@ jobs:
           pip install pytest
           pytest --version
           pytest test
+
+      - name: Notify slack of build status
+        if: success()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          status: SUCCESS
+          color: good
+
+      - name: Notify slack fail
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          status: FAILED
+          color: danger
         
 
   Slack-Notification:
@@ -62,3 +80,5 @@ jobs:
         with: 
           job-status: ${{job.status}}
           slack-bot-token: ${{ secrets.APP_TOKEN }}
+
+          
