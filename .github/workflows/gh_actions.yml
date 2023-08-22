@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: slack notification1
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' 
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: New ION PR opened!
@@ -50,11 +50,11 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification1
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && always()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: Recent Push to ION main!
-          SLACK_MESSAGE: ':rocket:'
+          SLACK_MESSAGE: '${{job.status}}  :rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification2
