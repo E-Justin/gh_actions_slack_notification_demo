@@ -58,7 +58,8 @@ jobs:
           #SLACK_MESSAGE: '${{job.status}}  :rocket:'
           #SLACK_MESSAGE: "${{ Python-tests.outputs.job-status }}"
           #SLACK_MESSAGE: "${{ run tests.outputs.job-status }}"
-          SLACK_MESSAGE: "${{ needs.Python-tests.outputs.job-status }}"
+          #SLACK_MESSAGE: "${{ needs.Python-tests.outputs.job-status }}"
+          SLACK_MESSAGE: "${{ needs.*.result }} :rocket:"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification2
