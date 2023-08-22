@@ -51,7 +51,8 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: slack notification fail
-        if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
+        #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
+        if: ${{ contains(needs.*.result, 'failure') }}
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: "Build failed in main :rotating_light:"
