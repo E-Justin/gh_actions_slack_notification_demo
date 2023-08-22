@@ -58,6 +58,8 @@ jobs:
           SLACK_TITLE: "Build failed in main :rotating_light:"
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: "failure"
+          SLACK_LINK_NAMES: true
+          SLACK_MESSAGE: "@justin.ezell"
 
       - name: slack notification success
         #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "success"
