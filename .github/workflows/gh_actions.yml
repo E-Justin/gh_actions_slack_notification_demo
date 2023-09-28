@@ -77,7 +77,7 @@ jobs:
 
       - name: slack notification fail 
         #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
-        if: failure() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: ${{ contains(needs.*.result, 'failure') }} && github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: "Build failed in main :rotating_light:"
