@@ -2,7 +2,7 @@ name: slack-notifications-pipeline
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ main ]  
   
   push:
     branches: [ main ]
@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: slack notification1
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: New ION PR opened!
