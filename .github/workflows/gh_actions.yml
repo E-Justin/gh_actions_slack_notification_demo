@@ -88,10 +88,7 @@ jobs:
           SLACK_MESSAGE: "@justin.ezell"
 
 
-      #   env:
-      #     SLACK_TITLE: "Build succeeded in main :tada:"
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      #     SLACK_COLOR: "success"
+
 
       
 
