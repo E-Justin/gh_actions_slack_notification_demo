@@ -11,88 +11,99 @@ on:
 
 
 jobs:
-  Python-tests:
-    runs-on: windows-latest
+  Upload-artifact-to-S3:
+    runs-on: ubuntu-latest
     steps:
-
-      - name: checkout repo
-        uses: actions/checkout@v3
-
-      - name: setup python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@master
+      - uses: shallwefootball/s3-upload-action@master
         with:
-          python-version: '3.10'
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          source_dir: 'test'
 
-      - name: create venv and install pytest
-        run: |
-          python -m pip install --upgrade pip
-          python -m venv venv
-          venv/Scripts/activate
+  # Python-tests:
+  #   runs-on: windows-latest
+  #   steps:
 
-      - name: run tests
-        run: |
-          pip install pytest
-          pytest --version
-          pytest test
+  #     - name: checkout repo
+  #       uses: actions/checkout@v3
+
+  #     - name: setup python
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: '3.10'
+
+  #     - name: create venv and install pytest
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         python -m venv venv
+  #         venv/Scripts/activate
+
+  #     - name: run tests
+  #       run: |
+  #         pip install pytest
+  #         pytest --version
+  #         pytest test
         
-  Python-tests2:
-    runs-on: windows-latest
-    steps:
+  # Python-tests2:
+  #   runs-on: windows-latest
+  #   steps:
 
-      - name: checkout repo
-        uses: actions/checkout@v3
+  #     - name: checkout repo
+  #       uses: actions/checkout@v3
 
-      - name: setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+  #     - name: setup python
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: '3.10'
 
-      - name: create venv and install pytest
-        run: |
-          python -m pip install --upgrade pip
-          python -m venv venv
-          venv/Scripts/activate
+  #     - name: create venv and install pytest
+  #       run: |
+  #         python -m pip install --upgrade pip
+  #         python -m venv venv
+  #         venv/Scripts/activate
 
-      - name: run test
-        run: |
-          pip install pytest
-          pytest --version
-          pytest tests_2
+  #     - name: run test
+  #       run: |
+  #         pip install pytest
+  #         pytest --version
+  #         pytest tests_2
 
       
   
-  Slack-Notification-on-new-PR:
-    needs: [Python-tests, Python-tests2]
-    runs-on: ubuntu-latest # only runs on linux
-    if: always() && github.event_name == 'pull_request' && github.event.action == 'opened'
+  # Slack-Notification-on-new-PR:
+  #   needs: [Python-tests, Python-tests2]
+  #   runs-on: ubuntu-latest # only runs on linux
+  #   if: always() && github.event_name == 'pull_request' && github.event.action == 'opened'
 
-    steps:
-      - name: slack notification on new PR
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: New ION PR opened!
-          SLACK_MESSAGE: ':rocket:'
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  #   steps:
+  #     - name: slack notification on new PR
+  #       uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_TITLE: New ION PR opened!
+  #         SLACK_MESSAGE: ':rocket:'
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           
 
-  Slack-Notification-on-main-fail:
-    needs: [Python-tests, Python-tests2]
-    runs-on: ubuntu-latest # only runs on linux
-    if: always() && github.ref == 'refs/heads/main'
+  # Slack-Notification-on-main-fail:
+  #   needs: [Python-tests, Python-tests2]
+  #   runs-on: ubuntu-latest # only runs on linux
+  #   if: always() && github.ref == 'refs/heads/main'
 
-    steps:
+  #   steps:
 
-      - name: slack notification fail 
-        #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
-        #if: ${{ contains(needs.*.result, 'failure') }} && github.event_name == 'push' && github.ref == 'refs/heads/main'
-        if: ${{ contains(needs.*.result, 'failure') }} 
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: "Build failed in main :rotating_light:"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: "failure"
-          SLACK_LINK_NAMES: true
-          SLACK_MESSAGE: "@justin.ezell"
+      # - name: slack notification fail 
+      #   #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
+      #   #if: ${{ contains(needs.*.result, 'failure') }} && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      #   if: ${{ contains(needs.*.result, 'failure') }} 
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_TITLE: "Build failed in main :rotating_light:"
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_COLOR: "failure"
+      #     SLACK_LINK_NAMES: true
+      #     SLACK_MESSAGE: "@justin.ezell"
     
 
 
