@@ -61,24 +61,31 @@ jobs:
 
       
   
-  Slack-Notification:
+  Slack-Notification-on-new-PR:
     needs: [Python-tests, Python-tests2]
     runs-on: ubuntu-latest # only runs on linux
-    if: always()
+    if: always() && github.event_name == 'pull_request' && github.event.action == 'opened'
 
     steps:
-      - name: slack notification1
-        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+      - name: slack notification on new PR
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: New ION PR opened!
           SLACK_MESSAGE: ':rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          
+
+  Slack-Notification-on-main-fail:
+    needs: [Python-tests, Python-tests2]
+    runs-on: ubuntu-latest # only runs on linux
+    if: always() && ${{ contains(needs.*.result, 'failure') }} 
+
+    steps:
 
       - name: slack notification fail 
         #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
         #if: ${{ contains(needs.*.result, 'failure') }} && github.event_name == 'push' && github.ref == 'refs/heads/main'
-        if: ${{ contains(needs.*.result, 'failure') }} 
+        #if: ${{ contains(needs.*.result, 'failure') }} 
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: "Build failed in main :rotating_light:"
@@ -86,6 +93,7 @@ jobs:
           SLACK_COLOR: "failure"
           SLACK_LINK_NAMES: true
           SLACK_MESSAGE: "@justin.ezell"
+    
 
 
 
