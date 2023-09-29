@@ -78,14 +78,14 @@ jobs:
   Slack-Notification-on-main-fail:
     needs: [Python-tests, Python-tests2]
     runs-on: ubuntu-latest # only runs on linux
-    if: always() && ${{ contains(needs.*.result, 'failure') }} 
+    if: always()  
 
     steps:
 
       - name: slack notification fail 
         #if: github.event_name == 'push' && "${{ join(needs.*.result, ',') }}" == "failure"
         #if: ${{ contains(needs.*.result, 'failure') }} && github.event_name == 'push' && github.ref == 'refs/heads/main'
-        #if: ${{ contains(needs.*.result, 'failure') }} 
+        if: ${{ contains(needs.*.result, 'failure') }} 
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: "Build failed in main :rotating_light:"
