@@ -78,7 +78,7 @@ jobs:
   Slack-Notification-on-main-fail:
     needs: [Python-tests, Python-tests2]
     runs-on: ubuntu-latest # only runs on linux
-    if: always() && github.event_name == 'push'
+    if: always() && github.ref == 'refs/heads/main'
 
     steps:
 
@@ -94,7 +94,6 @@ jobs:
           SLACK_LINK_NAMES: true
           SLACK_MESSAGE: "@justin.ezell"
     
-
 
 
 
