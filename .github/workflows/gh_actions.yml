@@ -71,7 +71,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: New ION PR opened!
-          SLACK_MESSAGE: ':rocket:'
+          SLACK_MESSAGE: '${{github.event.pull_request.title}} :rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           
 
